@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "battery_shield:shield_core_b",
+    "battery_shield:shield_core_r",
+    "battery_shield:shield_core_w",
+    "battery_shield:shield_core_p"
+  ]
+}

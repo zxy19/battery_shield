@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cc.xypp.battery_shield.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "battery_shield.refmap.json",
+  "mixins": [
+    "DamageSourceMixin",
+    "LivingEntityMixin",
+    "PlayerMixin"
+  ],
+  "client": [
+    "GuiGraphicMixin",
+    "MinecraftMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
