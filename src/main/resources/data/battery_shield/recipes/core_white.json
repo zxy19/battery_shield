@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BSB",
+    "ABA"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "minecraft:white_dye"
+    },
+    "S": {
+      "item": "battery_shield:steel"
+    }
+  },
+  "result": {
+    "item": "battery_shield:shield_core_w"
+  },
+  "show_notification": true
+}

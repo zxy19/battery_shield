@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "BSB",
+    "A A"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "A": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "item": "battery_shield:steel"
+    }
+  },
+  "result": {
+    "item": "battery_shield:shield_core_r"
+  },
+  "show_notification": true
+}

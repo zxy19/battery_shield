@@ -32,17 +32,18 @@ public class PlayerShieldOverlay implements IGuiOverlay {
         LocalPlayer player = Minecraft.getInstance().player;
         if(player == null)return;
         ILivingEntityA iliving = ((ILivingEntityA) (player));
-        float max = iliving.effect_test$getMaxShield();
-        float shield = iliving.effect_test$getShield();
+        float max = iliving.battery_shield$getMaxShield();
+        float shield = iliving.battery_shield$getShield();
 
-        RenderUtils.renderBar(guiGraphics, 40, height - 25, 96, 6, AssetsManager.SHIELD_BORDER, ShieldUtil.getShieldTypeByValue(max), shield,max);
+        RenderUtils.renderBar(guiGraphics, 37, height - 25, 96, 6, AssetsManager.SHIELD_BORDER, ShieldUtil.getShieldTypeByValue(max), shield,max);
         RenderUtils.renderHealth(guiGraphics, 40, height - 20, 96, 6, player.getHealth(), player.getMaxHealth());
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(0.8f, 0.8f, 0.8f);
         guiGraphics.drawString(Minecraft.getInstance().font, player.getName(), (int)(45/0.8), (int)((height - 32)/0.8), 0xffffffff);
         guiGraphics.pose().popPose();
         guiGraphics.pose().pushPose();
-        this.renderItem(guiGraphics,5f,25/5,(height - 23)/5);
+        guiGraphics.pose().scale(1.7f, 1.7f, 1.7f);
+        this.renderItem(guiGraphics,5f,(int)(15/1.7),(int)((height - 33)/1.7));
         guiGraphics.pose().popPose();
     }
 }

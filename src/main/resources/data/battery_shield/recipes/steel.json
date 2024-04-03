@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BBB",
+    "AAA"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "minecraft:cyan_dye"
+    }
+  },
+  "result": {
+    "item": "battery_shield:steel",
+    "count": 3
+  },
+  "show_notification": true
+}

@@ -1,4 +1,13 @@
 {
   "item.battery_shield.small_battery":"Small shield battery",
-  "item.battery_shield.battery":"Shield battery"
+  "item.battery_shield.battery":"Shield battery",
+  "item.battery_shield.steel":"Crafting Metal",
+  "item.battery_shield.shield_core_w":"Shield core[White]",
+  "item.battery_shield.shield_core_r":"Shield core[Red]",
+  "item.battery_shield.shield_core_b":"Shield core[Blue]",
+  "item.battery_shield.shield_core_p":"Shield core[Purple]",
+  "tooltip.battery_shield.level.red":"§cShield Red §9[%s/%s]",
+  "tooltip.battery_shield.level.blue":"§bShield Blue §9[%s/%s]",
+  "tooltip.battery_shield.level.purple":"§dShield Purple §9[%s/%s]",
+  "tooltip.battery_shield.level.white":"§fShield White §9[%s/%s]"
 }

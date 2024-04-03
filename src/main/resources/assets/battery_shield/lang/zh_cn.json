@@ -1,4 +1,13 @@
 {
   "item.battery_shield.small_battery":"小型护盾电池",
-  "item.battery_shield.battery":"护盾电池"
+  "item.battery_shield.battery":"护盾电池",
+  "item.battery_shield.steel":"制造金属",
+  "item.battery_shield.shield_core_w":"护盾核心[白]",
+  "item.battery_shield.shield_core_r":"护盾核心[红]",
+  "item.battery_shield.shield_core_b":"护盾核心[蓝]",
+  "item.battery_shield.shield_core_p":"护盾核心[紫]",
+  "tooltip.battery_shield.level.red":"§c红色护盾 §9[%s/%s]",
+  "tooltip.battery_shield.level.blue":"§b蓝色护盾 §9[%s/%s]",
+  "tooltip.battery_shield.level.purple":"§d紫色护盾 §9[%s/%s]",
+  "tooltip.battery_shield.level.white":"§f白色护盾 §9[%s/%s]"
 }

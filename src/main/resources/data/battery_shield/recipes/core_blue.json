@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BSB",
+    "ABA"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:gold_ingot"
+    },
+    "A": {
+      "item": "minecraft:cyan_dye"
+    },
+    "S": {
+      "item": "battery_shield:steel"
+    }
+  },
+  "result": {
+    "item": "battery_shield:shield_core_b"
+  },
+  "show_notification": true
+}

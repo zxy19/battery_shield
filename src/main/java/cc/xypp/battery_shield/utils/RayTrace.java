@@ -20,9 +20,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.function.Predicate;
 
 public class RayTrace implements BlockGetter {
-    private static Predicate<Entity> isVisible =
+    private static final Predicate<Entity> isVisible =
             entity -> !entity.isSpectator() && entity.isPickable();
-    private static Minecraft minecraft = Minecraft.getInstance();
+    private static final Minecraft minecraft = Minecraft.getInstance();
 
     @Override
     public BlockEntity getBlockEntity(BlockPos pos) {
@@ -74,13 +74,10 @@ public class RayTrace implements BlockGetter {
 
         if (!blockHit.getType().equals(BlockHitResult.Type.MISS)) {
             double blockDistance = blockHit.getLocation().distanceTo(position);
-            if (blockDistance > target.distanceTo(client.player)) {
-                return true;
-            }
+            return blockDistance > target.distanceTo(client.player);
         } else {
             return true;
         }
-        return false;
     }
 
     private ClipContext setupRayTraceContext(Player player, double distance,

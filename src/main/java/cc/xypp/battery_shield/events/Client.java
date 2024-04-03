@@ -14,22 +14,20 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = BatteryShield.MODID,value = Dist.CLIENT)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = BatteryShield.MODID, value = Dist.CLIENT)
 public class Client {
     @SubscribeEvent
     public static void onRenderNameplateEvent(RenderNameTagEvent event) {
         if (event.getEntity() instanceof LivingEntity living) {
             ILivingEntityA iLivingEntityA = (ILivingEntityA) living;
-            if(iLivingEntityA.effect_test$getMaxShield() <=0)return;
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.distanceTo(living) > 10) {
                 return;
             }
-            if(RenderUtils.raytrace(living)) {
+            if (RenderUtils.raytrace(living)) {
                 return;
             }
             EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
@@ -39,15 +37,16 @@ public class Client {
             poseStack.translate(0.0F, living.getBbHeight() + 0.5f, 0.0f);
             poseStack.mulPose(dispatcher.cameraOrientation());
             poseStack.scale(-0.025f, -0.025f, 0.025f);
-            RenderUtils.renderBar(guiGraphics,
-                    -50,
-                    -15,
-                    96,
-                    6,
-                    AssetsManager.SHIELD_BORDER,
-                    ShieldUtil.getShieldTypeByValue(iLivingEntityA.effect_test$getMaxShield()),
-                    iLivingEntityA.effect_test$getShield(),
-                    iLivingEntityA.effect_test$getMaxShield());
+            if (iLivingEntityA.battery_shield$getMaxShield() > 0)
+                RenderUtils.renderBar(guiGraphics,
+                        -53,
+                        -15,
+                        96,
+                        6,
+                        AssetsManager.SHIELD_BORDER,
+                        ShieldUtil.getShieldTypeByValue(iLivingEntityA.battery_shield$getMaxShield()),
+                        iLivingEntityA.battery_shield$getShield(),
+                        iLivingEntityA.battery_shield$getMaxShield());
             RenderUtils.renderHealth(guiGraphics, -50, -10, 96, 6, living.getHealth(), living.getMaxHealth());
             DamageNumberManager.getInstance().render(guiGraphics, living);
             RenderSystem.disableBlend();
@@ -55,5 +54,4 @@ public class Client {
             poseStack.popPose();
         }
     }
-
 }

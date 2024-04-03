@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
@@ -18,14 +17,13 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.joml.Vector3f;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
 public class DamageNumberManager {
-    private Map<DamageNumberType, Map<Integer, DamageNumberItem>> map = new HashMap<>();
+    private final Map<DamageNumberType, Map<Integer, DamageNumberItem>> map = new HashMap<>();
     public static DamageNumberManager Instance;
     public final SimpleChannel INSTANCE;
 

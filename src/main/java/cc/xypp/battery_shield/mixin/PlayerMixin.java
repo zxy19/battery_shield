@@ -1,5 +1,6 @@
 package cc.xypp.battery_shield.mixin;
 
+import cc.xypp.battery_shield.Config;
 import cc.xypp.battery_shield.api.IDamageSourceA;
 import cc.xypp.battery_shield.api.ILivingEntityA;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,8 +21,9 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @ModifyVariable(method = "actuallyHurt", at = @At(value = "INVOKE",target = "Lnet/minecraftforge/common/ForgeHooks;onLivingDamage(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)F", shift = At.Shift.BY,by = 2),name = "f1")
     public float beforeHurtEffect(float f1,DamageSource damageSource) {
-        if(((IDamageSourceA)(Object)damageSource).isByBatteryShield()) {
-            ((ILivingEntityA)(Object)this).effect_test$shieldHurt(f1);
+        if(((IDamageSourceA) damageSource).isByBatteryShield()) {
+            if(Config.zero_damage_event)f1=((IDamageSourceA) damageSource).getShieldDamage();
+            ((ILivingEntityA) this).battery_shield$shieldHurt(f1);
             return 0;
         }
         return f1;

@@ -6,7 +6,6 @@ import net.minecraft.world.item.Item;
 
 public class Steel extends Item {
     public Steel() {
-        super(new Properties().stacksTo(2));
+        super(new Properties().stacksTo(16));
     }
-
 }

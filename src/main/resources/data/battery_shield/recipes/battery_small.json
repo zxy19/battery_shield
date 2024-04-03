@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_nugget"
+    },
+    "B": {
+      "item": "battery_shield:steel"
+    }
+  },
+  "result": {
+    "item": "battery_shield:small_battery",
+    "count": 2
+  },
+  "show_notification": true
+}

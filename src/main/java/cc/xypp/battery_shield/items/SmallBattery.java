@@ -1,8 +1,13 @@
 package cc.xypp.battery_shield.items;
 
+import cc.xypp.battery_shield.Config;
 import cc.xypp.battery_shield.api.ILivingEntityA;
 import cc.xypp.battery_shield.data.UsageEvent;
 import cc.xypp.battery_shield.helper.UsageEventManager;
+import cc.xypp.battery_shield.utils.MiscUtil;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.OutgoingChatMessage;
+import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,23 +24,18 @@ import org.jetbrains.annotations.NotNull;
 public class SmallBattery extends Item {
 
     private static final int USE_DURATION = 30;
-    private static final int MAX_SHIELD = 20;
-    private static final int ADD_SHIELD = 10;
     public SmallBattery() {
-        super(new Properties().stacksTo(2));
+        super(new Properties().stacksTo(4));
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack p_41409_, Level p_41410_, LivingEntity p_41411_) {
         ILivingEntityA iLivingEntityA = (ILivingEntityA) p_41411_;
-        if(iLivingEntityA.effect_test$getMaxShield() < MAX_SHIELD){
-            iLivingEntityA.effect_test$setMaxShield(MAX_SHIELD);
-        }
         if(p_41411_ instanceof ServerPlayer sp){
-            sp.getCooldowns().addCooldown(this,40);
-            sp.getCooldowns().addCooldown(Register.battery.get(),40);
+            sp.getCooldowns().addCooldown(this, Config.sheild_cooldown);
+            sp.getCooldowns().addCooldown(Register.battery.get(),Config.sheild_cooldown);
         }
-        iLivingEntityA.effect_test$setShield(Math.min((iLivingEntityA).effect_test$getShield() + ADD_SHIELD, (iLivingEntityA).effect_test$getMaxShield()));
+        iLivingEntityA.battery_shield$setShield(Math.min((iLivingEntityA).battery_shield$getShield() + Config.small_battery_value, (iLivingEntityA).battery_shield$getMaxShield()));
         return super.finishUsingItem(p_41409_, p_41410_, p_41411_);
     }
 
@@ -55,6 +55,7 @@ public class SmallBattery extends Item {
             this.finishUsingItem(stack,entity.level(),entity);
             if(entity instanceof ServerPlayer sp){
                 UsageEventManager.getInstance().send(sp,UsageEvent.CHARGE_DONE);
+                stack.setCount(stack.getCount() - 1);
             }
         }else if(count > 0){
             if(entity instanceof ServerPlayer sp){
@@ -73,22 +74,15 @@ public class SmallBattery extends Item {
         super.onUseTick(p_41428_, p_41429_, p_41430_, p_41431_);
     }
 
-    @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        if(context.getPlayer()==null)return InteractionResult.FAIL;
-        ILivingEntityA iLivingEntityA = (ILivingEntityA) context.getPlayer();
-        float max = Math.max(iLivingEntityA.effect_test$getMaxShield(),MAX_SHIELD);
-        if(max == iLivingEntityA.effect_test$getShield()){
-            return InteractionResult.FAIL;
-        }
-        return super.onItemUseFirst(stack, context);
-    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(@NotNull Level p_41432_, @NotNull Player p_41433_, @NotNull InteractionHand p_41434_) {
         if(p_41433_ instanceof ServerPlayer sp){
             UsageEventManager.getInstance().send(sp,UsageEvent.CHARGE_START_SMALL);
+            if (Config.send_charging_msg)
+                sp.sendChatMessage(OutgoingChatMessage.create(PlayerChatMessage.unsigned(p_41433_.getUUID(), MiscUtil.getMessage())), false, ChatType.bind(ChatType.CHAT, p_41433_));
         }
+
         p_41433_.startUsingItem(p_41434_);
         return InteractionResultHolder.consume(p_41433_.getItemInHand(p_41434_));
     }

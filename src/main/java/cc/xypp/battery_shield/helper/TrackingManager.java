@@ -5,6 +5,7 @@ import cc.xypp.battery_shield.packet.TrackingPackat;
 import cc.xypp.battery_shield.utils.EntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -43,8 +44,8 @@ public class TrackingManager {
                 entity = Minecraft.getInstance().level.getEntity(packet.id);
             }
             if (entity instanceof LivingEntity) {
-                ((ILivingEntityA) (Object) entity).effect_test$setShield(packet.shield);
-                ((ILivingEntityA) (Object) entity).effect_test$setMaxShield(packet.maxShield);
+                ((ILivingEntityA) entity).battery_shield$setShield(packet.shield);
+                ((ILivingEntityA) entity).battery_shield$setMaxShield(packet.maxShield);
             }
         });
         ctx.get().setPacketHandled(true);
@@ -54,11 +55,11 @@ public class TrackingManager {
         if (entity == null) return;
         if (EntityUtil.entityLevelIsClient(entity)) return;
 
-        ILivingEntityA a = (ILivingEntityA) (Object) entity;
+        ILivingEntityA a = (ILivingEntityA) entity;
         if (entity.getType() == EntityType.PLAYER) {
-            INSTANCE.send(PacketDistributor.ALL.noArg(), new TrackingPackat((int) entity.getId(), a.effect_test$getShield(), a.effect_test$getMaxShield()));
+            INSTANCE.send(PacketDistributor.ALL.noArg(),new TrackingPackat(entity.getId(), a.battery_shield$getShield(), a.battery_shield$getMaxShield()));
         } else {
-            INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), new TrackingPackat((int) entity.getId(), a.effect_test$getShield(), a.effect_test$getMaxShield()));
+            INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), new TrackingPackat(entity.getId(), a.battery_shield$getShield(), a.battery_shield$getMaxShield()));
         }
     }
 }

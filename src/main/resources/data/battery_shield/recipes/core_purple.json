@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BSB",
+    "ABA"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:diamond"
+    },
+    "A": {
+      "item": "minecraft:purple_dye"
+    },
+    "S": {
+      "item": "battery_shield:steel"
+    }
+  },
+  "result": {
+    "item": "battery_shield:shield_core_p"
+  },
+  "show_notification": true
+}

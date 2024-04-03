@@ -6,6 +6,7 @@
   "refmap": "battery_shield.refmap.json",
   "mixins": [
     "DamageSourceMixin",
+    "InventoryMixin",
     "LivingEntityMixin",
     "PlayerMixin"
   ],

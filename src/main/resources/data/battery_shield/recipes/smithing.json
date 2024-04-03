@@ -1,15 +1,15 @@
 {
   "type": "battery_shield:shield_upgrade",
   "base": {
-    "item": "minecraft:leather_helmet"
+    "tag": "forge:armors/chestplates"
   },
   "addition": {
     "tag": "battery_shield:shield_core"
   },
   "template": {
-    "item": "minecraft:leather"
+    "item": "battery_shield:steel"
   },
   "result": {
-    "item": "minecraft:leather_helmet"
+    "item": "minecraft:leather_chestplate"
   }
 }

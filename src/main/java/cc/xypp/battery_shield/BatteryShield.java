@@ -6,7 +6,9 @@ import cc.xypp.battery_shield.helper.UsageEventManager;
 import cc.xypp.battery_shield.items.Register;
 import cc.xypp.battery_shield.items.SoundRegistry;
 import cc.xypp.battery_shield.recipes.RecipesRegistry;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -18,6 +20,7 @@ public class BatteryShield {
         TrackingManager.getInstance();
         DamageNumberManager.getInstance();
         UsageEventManager.getInstance();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         RecipesRegistry.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         Register.TAB_DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         Register.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
