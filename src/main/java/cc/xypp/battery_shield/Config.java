@@ -39,6 +39,8 @@ public class Config {
             = BUILDER.translation("battery_shield.display.health").define("display.health", true);
     private static final ForgeConfigSpec.BooleanValue SHOW_NUMBER
             = BUILDER.translation("battery_shield.display.number").define("display.number", true);
+    private static final ForgeConfigSpec.BooleanValue SHOW_HUD
+            = BUILDER.translation("battery_shield.display.hud").define("display.hud", true);
     private static final ForgeConfigSpec.BooleanValue SEND_CHARGING_MSG
             = BUILDER.translation("battery_shield.send_charging_msg").define("send_charging_msg", true);
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> MESSAGES
@@ -58,6 +60,7 @@ public class Config {
     public static boolean display_shield;
     public static boolean display_health;
     public static boolean display_number;
+    public static boolean display_hud;
     public static boolean send_charging_msg;
     public static boolean zero_damage_event;
     public static List<String> messages;
@@ -71,6 +74,7 @@ public class Config {
         display_shield = SHOW_SHIELD.get();
         display_health = SHOW_HEALTH.get();
         display_number = SHOW_NUMBER.get();
+        display_hud = SHOW_HUD.get();
         send_charging_msg = SEND_CHARGING_MSG.get();
         battery_value = BATTERY_VALUE.get();
         small_battery_value = SMALL_BATTERY_VALUE.get();

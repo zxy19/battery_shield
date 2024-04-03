@@ -9,5 +9,6 @@
   "tooltip.battery_shield.level.red":"§c红色护盾 §9[%s/%s]",
   "tooltip.battery_shield.level.blue":"§b蓝色护盾 §9[%s/%s]",
   "tooltip.battery_shield.level.purple":"§d紫色护盾 §9[%s/%s]",
-  "tooltip.battery_shield.level.white":"§f白色护盾 §9[%s/%s]"
+  "tooltip.battery_shield.level.white":"§f白色护盾 §9[%s/%s]",
+  "item_group.battery_shield.main":"电池护盾"
 }

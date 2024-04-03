@@ -1,5 +1,6 @@
 package cc.xypp.battery_shield.hud;
 
+import cc.xypp.battery_shield.Config;
 import cc.xypp.battery_shield.api.ILivingEntityA;
 import cc.xypp.battery_shield.helper.AssetsManager;
 import cc.xypp.battery_shield.utils.RenderUtils;
@@ -29,6 +30,7 @@ public class PlayerShieldOverlay implements IGuiOverlay {
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int width, int height) {
+        if(!Config.display_hud)return;
         LocalPlayer player = Minecraft.getInstance().player;
         if(player == null)return;
         ILivingEntityA iliving = ((ILivingEntityA) (player));

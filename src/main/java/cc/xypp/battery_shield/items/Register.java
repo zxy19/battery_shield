@@ -28,7 +28,7 @@ public class Register {
     public static final DeferredRegister<CreativeModeTab> TAB_DEFERRED_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BatteryShield.MODID);
     public static final RegistryObject<CreativeModeTab> BATTERY_SHIELD_TAB = TAB_DEFERRED_REGISTER.register("example", () -> CreativeModeTab.builder()
             // Set name of tab to display
-            .title(Component.translatable("item_group." + BatteryShield.MODID + ".example"))
+            .title(Component.translatable("item_group." + BatteryShield.MODID + ".main"))
             // Set icon of creative tab
             .icon(() -> new ItemStack(battery.get()))
             // Add default items to tab
