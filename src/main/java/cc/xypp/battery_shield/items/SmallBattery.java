@@ -34,6 +34,7 @@ public class SmallBattery extends Item {
         if(p_41411_ instanceof ServerPlayer sp){
             sp.getCooldowns().addCooldown(this, Config.sheild_cooldown);
             sp.getCooldowns().addCooldown(Register.battery.get(),Config.sheild_cooldown);
+            sp.getCooldowns().addCooldown(Register.phoenixBattery.get(), Config.sheild_cooldown);
         }
         iLivingEntityA.battery_shield$setShield(Math.min((iLivingEntityA).battery_shield$getShield() + Config.small_battery_value, (iLivingEntityA).battery_shield$getMaxShield()));
         return super.finishUsingItem(p_41409_, p_41410_, p_41411_);

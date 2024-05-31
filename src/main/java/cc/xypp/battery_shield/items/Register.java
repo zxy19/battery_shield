@@ -19,6 +19,7 @@ public class Register {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BatteryShield.MODID);
     public static final RegistryObject<Item> smallBattery = ITEMS.register("small_battery", SmallBattery::new);
     public static final RegistryObject<Item> battery = ITEMS.register("battery", Battery::new);
+    public static final RegistryObject<Item> phoenixBattery = ITEMS.register("phoenix_battery", PhoenixBattery::new);
     public static final RegistryObject<Item> steel = ITEMS.register("steel", Steel::new);
     public static final RegistryObject<Item> shield_core_b = ITEMS.register("shield_core_b", ShieldCoreB::new);
     public static final RegistryObject<Item> shield_core_r = ITEMS.register("shield_core_r", ShieldCoreR::new);
@@ -35,6 +36,7 @@ public class Register {
             .displayItems((params, output) -> {
                 output.accept(battery.get());
                 output.accept(smallBattery.get());
+                output.accept(phoenixBattery.get());
                 output.accept(steel.get());
                 output.accept(shield_core_b.get());
                 output.accept(shield_core_r.get());

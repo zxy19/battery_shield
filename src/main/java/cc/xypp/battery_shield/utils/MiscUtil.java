@@ -9,4 +9,7 @@ public class MiscUtil {
     public static String getMessage() {
         return Config.messages.get(random.nextInt(0, Config.messages.size()));
     }
+    public static String getMessagePhoenix() {
+        return Config.messagesPhoenix.get(random.nextInt(0, Config.messagesPhoenix.size()));
+    }
 }

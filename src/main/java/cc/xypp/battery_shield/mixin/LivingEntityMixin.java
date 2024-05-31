@@ -109,8 +109,9 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntityA
             ci.cancel();
         }
     }
-    @ModifyVariable(method = "actuallyHurt", at = @At(value = "INVOKE",target = "Lnet/minecraftforge/common/ForgeHooks;onLivingDamage(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)F", shift = At.Shift.BY,by = 2),name = "f1")
+    @ModifyVariable(method = "actuallyHurt", at = @At(value = "INVOKE",target = "Lnet/minecraftforge/common/ForgeHooks;onLivingDamage(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)F", shift = At.Shift.BY,by = 2),name = "f1",require = 0)
     public float beforeHurtEffect(float f1,DamageSource p_21240_) {
+        if(Config.calc_damage_with_event)return f1;
         if(((IDamageSourceA) p_21240_).isByBatteryShield()) {
             if(Config.zero_damage_event)f1=((IDamageSourceA) p_21240_).getShieldDamage();
             ((ILivingEntityA) this).battery_shield$shieldHurt(f1);

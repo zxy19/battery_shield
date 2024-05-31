@@ -11,6 +11,12 @@
       "battery_shield:charge_small"
     ]
   },
+  "battery_charge_phoenix": {
+    "subtitle": "charging",
+    "sounds": [
+      "battery_shield:charge_phoenix"
+    ]
+  },
   "battery_charge_start": {
     "subtitle": "charging",
     "sounds": [
@@ -18,11 +24,11 @@
     ]
   },
   "battery_charge_interrupt": {
-  "subtitle": "charging",
-  "sounds": [
-    "battery_shield:interrupt"
-  ]
-},
+    "subtitle": "charging",
+    "sounds": [
+      "battery_shield:interrupt"
+    ]
+  },
   "battery_charge_done": {
     "subtitle": "charging",
     "sounds": [

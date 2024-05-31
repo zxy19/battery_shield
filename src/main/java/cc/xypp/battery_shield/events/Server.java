@@ -91,6 +91,14 @@ public class Server {
         if (EntityUtil.entityLevelIsClient(event.getEntity())) {
             return;
         }
+        if(Config.calc_damage_with_event){
+            if(event.getSource() instanceof IDamageSourceA iDamageSourceA && event.getEntity() instanceof ILivingEntityA iLivingEntityA){
+                if(iDamageSourceA.isByBatteryShield()){
+                    iLivingEntityA.battery_shield$shieldHurt(iDamageSourceA.getShieldDamage());
+                    event.setAmount(0);
+                }
+            }
+        }
         if (event.getSource().getEntity() instanceof ServerPlayer sp) {
             DamageNumberManager.getInstance().sendDamagePacket(event.getEntity(),
                     ShieldUtil.getTypeBySourceValue(event.getSource(), ((ILivingEntityA) event.getEntity()).battery_shield$getMaxShield()),

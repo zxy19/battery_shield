@@ -21,10 +21,15 @@ import java.util.List;
 
 public class RenderUtils {
     public static void renderHealth(GuiGraphics guiGraphics, int x, int y, int width, int height, double value, double max) {
-        if(!Config.display_health)return;
+        renderHealth(guiGraphics, x, y, width, height, value, max, false);
+    }
+
+    public static void renderHealth(GuiGraphics guiGraphics, int x, int y, int width, int height, double value, double max, boolean force) {
+        if (!force && !Config.display_health) return;
         AssetsManager.HEALTH_EMPTY.blit(guiGraphics, x, y, 0, 0, width, height);
         AssetsManager.HEALTH_FILL.blit(guiGraphics, x, y, 0, 0, (int) (width * value / max), height);
     }
+
     public static void renderBar(GuiGraphics guiGraphics,
                                  int x,
                                  int y,
@@ -34,7 +39,20 @@ public class RenderUtils {
                                  AssetsManager.ImageAssets fill,
                                  float value,
                                  float max) {
-        if(!Config.display_shield)return;
+        renderBar(guiGraphics, x, y, width, height, bg, fill, value, max, false);
+    }
+
+    public static void renderBar(GuiGraphics guiGraphics,
+                                 int x,
+                                 int y,
+                                 int width,
+                                 int height,
+                                 AssetsManager.ImageAssets bg,
+                                 AssetsManager.ImageAssets fill,
+                                 float value,
+                                 float max,
+                                 boolean force) {
+        if (!Config.display_shield && !force) return;
         for (int i = 0; i < 5; i++) {
             renderBarCell(guiGraphics, x + i * width / 5, y, width / 5, height, fill, value - i * 10);
         }
@@ -53,14 +71,14 @@ public class RenderUtils {
     }
 
     public static void renderDamageNumber(GuiGraphics guiGraphics, int x, int y, DamageNumberType type, double value, Vector3f offset) {
-        if(!Config.display_number)return;
+        if (!Config.display_number) return;
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(0F, 5F, 0.05F);
-        guiGraphics.pose().translate(offset.x(), offset.y(),0);
+        guiGraphics.pose().translate(offset.x(), offset.y(), 0);
         guiGraphics.drawString(Minecraft.getInstance().font, String.format("%.1f", value), x + 9, y, ShieldUtil.getColor(type));
         guiGraphics.pose().scale(0.5F, 0.5F, 0.5F);
         AssetsManager.ImageAssets icon = ShieldUtil.getIconByType(type);
-        if (icon != null) icon.blit(guiGraphics, x*2, y*2, 0, 0, 16, 16);
+        if (icon != null) icon.blit(guiGraphics, x * 2, y * 2, 0, 0, 16, 16);
         guiGraphics.pose().popPose();
     }
 

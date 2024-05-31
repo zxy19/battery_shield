@@ -10,24 +10,22 @@ import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
 
+public class PhoenixBattery extends Item {
+    private static final int USE_DURATION = 180;
 
-public class Battery extends Item {
-    private static final int USE_DURATION = 80;
-
-    public Battery() {
+    public PhoenixBattery() {
         super(new Properties().stacksTo(2));
     }
 
@@ -59,6 +57,7 @@ public class Battery extends Item {
             this.finishUsingItem(stack, entity.level(), entity);
             if (entity instanceof ServerPlayer sp) {
                 UsageEventManager.getInstance().send(sp, UsageEvent.CHARGE_DONE);
+                sp.addEffect(new MobEffectInstance(MobEffects.HEAL, 1, 50));
                 stack.setCount(stack.getCount() - 1);
             }
         } else if (count > 0) {
@@ -72,7 +71,7 @@ public class Battery extends Item {
     public void onUseTick(@NotNull Level p_41428_, @NotNull LivingEntity p_41429_, @NotNull ItemStack p_41430_, int p_41431_) {
         if (p_41431_ == USE_DURATION - 10) {
             if (p_41429_ instanceof ServerPlayer sp) {
-                UsageEventManager.getInstance().send(sp, UsageEvent.CHARGE_DURATION);
+                UsageEventManager.getInstance().send(sp, UsageEvent.CHARGE_DURATION_PHOENIX);
             }
         }
         super.onUseTick(p_41428_, p_41429_, p_41430_, p_41431_);
@@ -81,9 +80,9 @@ public class Battery extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(@NotNull Level p_41432_, @NotNull Player p_41433_, @NotNull InteractionHand p_41434_) {
         if (p_41433_ instanceof ServerPlayer sp) {
-            UsageEventManager.getInstance().send(sp, UsageEvent.CHARGE_START);
+            UsageEventManager.getInstance().send(sp, UsageEvent.CHARGE_START_PHOENIX);
             if (Config.send_charging_msg)
-                sp.sendChatMessage(OutgoingChatMessage.create(PlayerChatMessage.unsigned(p_41433_.getUUID(), MiscUtil.getMessage())), false, ChatType.bind(ChatType.CHAT, p_41433_));
+                sp.sendChatMessage(OutgoingChatMessage.create(PlayerChatMessage.unsigned(p_41433_.getUUID(), MiscUtil.getMessagePhoenix())), false, ChatType.bind(ChatType.CHAT, p_41433_));
         }
         p_41433_.startUsingItem(p_41434_);
         return InteractionResultHolder.consume(p_41433_.getItemInHand(p_41434_));

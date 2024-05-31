@@ -45,9 +45,15 @@ public class Config {
             = BUILDER.translation("battery_shield.send_charging_msg").define("send_charging_msg", true);
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> MESSAGES
             = BUILDER.translation("battery_shield.messages").defineList("messages", List.of("正在使用护盾电池","正在给护盾充能"), o -> o instanceof String);
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> MESSAGES_PHOENIX
+            = BUILDER.translation("battery_shield.messages_phoenix").defineList("messages_phoenix", List.of("正在使用凤凰治疗包"), o -> o instanceof String);
+
     private static final ForgeConfigSpec.BooleanValue ZERO_DAMAGE_EVENT
             = BUILDER.translation("battery_shield.zero_damage_event")
             .comment("Set damage to 0 when protected by shield.It will cause some mod cannot recognize this damage.").define("func.zero_damage_event", false);
+    private static final ForgeConfigSpec.BooleanValue CALC_DAMAGE_WITH_EVENT
+            = BUILDER.translation("battery_shield.calc_damage_with_event")
+            .comment("Calculate damage on shield with event. All damage on shield will be calculated with our mixin function in LivingEntity.hurt after any other hooks. If enabled, we will use forge event with lowest priority instead.").define("func.calc_damage_with_event", false);
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -63,7 +69,10 @@ public class Config {
     public static boolean display_hud;
     public static boolean send_charging_msg;
     public static boolean zero_damage_event;
+    public static boolean calc_damage_with_event;
     public static List<String> messages;
+    public static List<String> messagesPhoenix;
+
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
@@ -80,6 +89,9 @@ public class Config {
         small_battery_value = SMALL_BATTERY_VALUE.get();
         messages = new ArrayList<>();
         messages.addAll(MESSAGES.get());
+        messagesPhoenix = new ArrayList<>();
+        messagesPhoenix.addAll(MESSAGES_PHOENIX.get());
         zero_damage_event = ZERO_DAMAGE_EVENT.get();
+        calc_damage_with_event = CALC_DAMAGE_WITH_EVENT.get();
     }
 }

@@ -19,6 +19,8 @@ public class SoundRegistry {
 
     public static ResourceLocation charge_small = new ResourceLocation(BatteryShield.MODID, "battery_charge_small");
     public static RegistryObject<SoundEvent> CHARGE_SMALL = SOUND.register("battery_charge_small", () -> SoundEvent.createVariableRangeEvent(charge_small));
+    public static ResourceLocation charge_phoenix = new ResourceLocation(BatteryShield.MODID, "battery_charge_phoenix");
+    public static RegistryObject<SoundEvent> CHARGE_PHOENIX = SOUND.register("battery_charge_phoenix", () -> SoundEvent.createVariableRangeEvent(charge_phoenix));
 
     public static ResourceLocation charge_interrupt = new ResourceLocation(BatteryShield.MODID, "battery_charge_interrupt");
     public static RegistryObject<SoundEvent> CHARGE_INTERRUPT = SOUND.register("battery_charge_interrupt", () -> SoundEvent.createVariableRangeEvent(charge_interrupt));
