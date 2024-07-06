@@ -34,5 +34,14 @@
     "sounds": [
       "battery_shield:done"
     ]
+  },
+  "battery_shield_break": {
+    "subtitle": "shield_break",
+    "sounds": [
+      "battery_shield:shield_break_1",
+      "battery_shield:shield_break_2",
+      "battery_shield:shield_break_3",
+      "battery_shield:shield_break_4"
+    ]
   }
 }

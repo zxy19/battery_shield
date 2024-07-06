@@ -26,5 +26,4 @@ public class BatteryShield {
         Register.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         SoundRegistry.SOUND.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
-
 }

@@ -8,7 +8,6 @@ import cc.xypp.battery_shield.helper.AssetsManager;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -96,7 +95,7 @@ public class ShieldUtil {
         };
     }
     public static DamageNumberType getTypeBySourceValue(DamageSource source, float value) {
-        if (((IDamageSourceA) source).isByBatteryShield()) {
+        if (((IDamageSourceA) source).battery_shield$isByBatteryShield()) {
             if (value > Config.shield_pre_level*4) {
                 return DamageNumberType.SHIELD_RED;
             } else if (value > Config.shield_pre_level*3) {

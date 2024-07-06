@@ -23,7 +23,7 @@ public abstract class MinecraftMixin implements IGuiGraphicsGetter {
         @Override
         public GuiGraphics getGuiGraphics(PoseStack pose) {
             final GuiGraphics graphics = getGuiGraphicsRaw();
-            ((IGuiGraphics) graphics).setPose(pose);
+            ((IGuiGraphics) graphics).battery_shield$setPose(pose);
             return graphics;
         }
 

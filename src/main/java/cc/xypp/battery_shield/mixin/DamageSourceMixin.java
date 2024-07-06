@@ -9,35 +9,43 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(DamageSource.class)
 public abstract class DamageSourceMixin implements IDamageSourceA {
     @Unique
-    private boolean byBatteryShield;
+    private boolean battery_shield$byBatteryShield;
 
     @Unique
     private float shieldDamage;
     @Unique
     private DamageNumberType shieldDamageType;
-    public boolean isByBatteryShield() {
-        return byBatteryShield;
-    }
-    public void setByBatteryShield(boolean byBatteryShield) {
-        this.byBatteryShield = byBatteryShield;
-    }
+    @Unique
+    private boolean breakShield;
 
+    public boolean battery_shield$isByBatteryShield() {
+        return battery_shield$byBatteryShield;
+    }
+    public void battery_shield$setByBatteryShield(boolean byBatteryShield) {
+        this.battery_shield$byBatteryShield = byBatteryShield;
+    }
+    public void battery_shield$setIsBreakShield(boolean isBreakShield) {
+        this.breakShield = isBreakShield;
+    }
+    public boolean battery_shield$isBreakShield() {
+        return breakShield;
+    }
     @Override
-    public void setShieldDamage(float damage) {
+    public void battery_shield$setShieldDamage(float damage) {
         this.shieldDamage = damage;
     }
     @Override
-    public float getShieldDamage() {
+    public float battery_shield$getShieldDamage() {
         return shieldDamage;
     }
 
     @Override
-    public DamageNumberType getShieldDamageType() {
+    public DamageNumberType battery_shield$getShieldDamageType() {
         return shieldDamageType;
     }
 
     @Override
-    public void setShieldDamageType(DamageNumberType type) {
+    public void battery_shield$setShieldDamageType(DamageNumberType type) {
         this.shieldDamageType = type;
     }
 

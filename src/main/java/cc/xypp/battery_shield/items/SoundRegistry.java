@@ -27,4 +27,7 @@ public class SoundRegistry {
 
     public static ResourceLocation charge_done = new ResourceLocation(BatteryShield.MODID, "battery_charge_done");
     public static RegistryObject<SoundEvent> CHARGE_DONE = SOUND.register("battery_charge_done", () -> SoundEvent.createVariableRangeEvent(charge_done));
+
+    public static ResourceLocation shield_break = new ResourceLocation(BatteryShield.MODID, "battery_shield_break");
+    public static RegistryObject<SoundEvent> SHIELD_BREAK = SOUND.register("shield_break", () -> SoundEvent.createVariableRangeEvent(shield_break));
 }

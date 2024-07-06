@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class InventoryMixin  implements Container, Nameable {
     @Inject(method = "hurtArmor", at = @At("HEAD"),cancellable = true)
     public void hurtArmor(DamageSource p_150073_, float p_150074_, int[] p_150075_, CallbackInfo ci) {
-        if(((IDamageSourceA)p_150073_).isByBatteryShield()) {
+        if(((IDamageSourceA)p_150073_).battery_shield$isByBatteryShield()) {
             ci.cancel();
         }
     }

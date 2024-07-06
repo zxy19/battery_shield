@@ -5,8 +5,10 @@ import cc.xypp.battery_shield.Config;
 import cc.xypp.battery_shield.api.IDamageSourceA;
 import cc.xypp.battery_shield.api.ILivingEntityA;
 import cc.xypp.battery_shield.data.ShieldType;
+import cc.xypp.battery_shield.data.UsageEvent;
 import cc.xypp.battery_shield.helper.DamageNumberManager;
 import cc.xypp.battery_shield.helper.TrackingManager;
+import cc.xypp.battery_shield.helper.UsageEventManager;
 import cc.xypp.battery_shield.utils.EntityUtil;
 import cc.xypp.battery_shield.utils.ShieldUtil;
 import net.minecraft.nbt.CompoundTag;
@@ -65,21 +67,16 @@ public class Server {
             if (maxValue > 50) maxValue = 50;
             a.battery_shield$setShield(maxValue);
             a.battery_shield$setMaxShield(maxValue);
-//            System.out.println(11111);
             if (shieldArmor.getTag() == null) {
                 shieldArmor.setTag(new CompoundTag());
             }
-//            System.out.println(22222);
-//            System.out.println(shieldArmor);
-//            System.out.println(shieldArmor.getTag());
-
             shieldArmor.getTag().putInt("core_level", ShieldUtil.getShieldTypeByMaxValue(maxValue).ordinal());
         }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onLivingHurt(LivingHurtEvent event) {
-        if (((IDamageSourceA) event.getSource()).isByBatteryShield()) {
+        if (((IDamageSourceA) event.getSource()).battery_shield$isByBatteryShield()) {
             if (Config.zero_damage_event) {
                 event.setAmount(0);
             }
@@ -91,19 +88,28 @@ public class Server {
         if (EntityUtil.entityLevelIsClient(event.getEntity())) {
             return;
         }
-        if(Config.calc_damage_with_event){
-            if(event.getSource() instanceof IDamageSourceA iDamageSourceA && event.getEntity() instanceof ILivingEntityA iLivingEntityA){
-                if(iDamageSourceA.isByBatteryShield()){
-                    iLivingEntityA.battery_shield$shieldHurt(iDamageSourceA.getShieldDamage());
+        if (event.getSource().getEntity() instanceof ServerPlayer sp && event.getSource() instanceof IDamageSourceA iDamageSourceA) {
+            float amount = event.getAmount();
+            boolean isBreakShield = iDamageSourceA.battery_shield$isBreakShield();
+            if (iDamageSourceA.battery_shield$isByBatteryShield()) {
+                amount = iDamageSourceA.battery_shield$getShieldDamage();
+            }
+            if (isBreakShield) {
+                UsageEventManager.getInstance().send(sp, UsageEvent.SHIELD_BREAK);
+            }
+            DamageNumberManager.getInstance().sendDamagePacket(event.getEntity(),
+                    ShieldUtil.getTypeBySourceValue(event.getSource(), ((ILivingEntityA) event.getEntity()).battery_shield$getMaxShield()),
+                    isBreakShield,
+                    amount,
+                    sp);
+        }
+        if (Config.calc_damage_with_event) {
+            if (event.getSource() instanceof IDamageSourceA iDamageSourceA && event.getEntity() instanceof ILivingEntityA iLivingEntityA) {
+                if (iDamageSourceA.battery_shield$isByBatteryShield()) {
+                    iLivingEntityA.battery_shield$shieldHurt(iDamageSourceA.battery_shield$getShieldDamage());
                     event.setAmount(0);
                 }
             }
-        }
-        if (event.getSource().getEntity() instanceof ServerPlayer sp) {
-            DamageNumberManager.getInstance().sendDamagePacket(event.getEntity(),
-                    ShieldUtil.getTypeBySourceValue(event.getSource(), ((ILivingEntityA) event.getEntity()).battery_shield$getMaxShield()),
-                    event.getAmount(),
-                    sp);
         }
     }
 

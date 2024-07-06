@@ -5,6 +5,7 @@ import cc.xypp.battery_shield.api.ILivingEntityA;
 import cc.xypp.battery_shield.data.UsageEvent;
 import cc.xypp.battery_shield.helper.UsageEventManager;
 import cc.xypp.battery_shield.utils.MiscUtil;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.network.chat.PlayerChatMessage;
@@ -52,8 +53,8 @@ public class SmallBattery extends Item {
 
     @Override
     public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
+        super.onStopUsing(stack, entity,count);
         if(count == 0){
-            this.finishUsingItem(stack,entity.level(),entity);
             if(entity instanceof ServerPlayer sp){
                 UsageEventManager.getInstance().send(sp,UsageEvent.CHARGE_DONE);
                 stack.setCount(stack.getCount() - 1);
@@ -80,8 +81,8 @@ public class SmallBattery extends Item {
     public InteractionResultHolder<ItemStack> use(@NotNull Level p_41432_, @NotNull Player p_41433_, @NotNull InteractionHand p_41434_) {
         if(p_41433_ instanceof ServerPlayer sp){
             UsageEventManager.getInstance().send(sp,UsageEvent.CHARGE_START_SMALL);
-            if (Config.send_charging_msg)
-                sp.sendChatMessage(OutgoingChatMessage.create(PlayerChatMessage.unsigned(p_41433_.getUUID(), MiscUtil.getMessage())), false, ChatType.bind(ChatType.CHAT, p_41433_));
+        }else if(p_41433_ instanceof  LocalPlayer lp){
+            lp.connection.sendChat(MiscUtil.getMessage());
         }
 
         p_41433_.startUsingItem(p_41434_);

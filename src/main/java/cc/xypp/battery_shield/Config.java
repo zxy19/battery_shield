@@ -41,6 +41,9 @@ public class Config {
             = BUILDER.translation("battery_shield.display.number").define("display.number", true);
     private static final ForgeConfigSpec.BooleanValue SHOW_HUD
             = BUILDER.translation("battery_shield.display.hud").define("display.hud", true);
+    private static final ForgeConfigSpec.BooleanValue USE_2D_HEAD
+            = BUILDER.translation("battery_shield.use_2d_head")
+            .define("misc.use_2d_head", true);
     private static final ForgeConfigSpec.BooleanValue SEND_CHARGING_MSG
             = BUILDER.translation("battery_shield.send_charging_msg").define("send_charging_msg", true);
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> MESSAGES
@@ -54,6 +57,9 @@ public class Config {
     private static final ForgeConfigSpec.BooleanValue CALC_DAMAGE_WITH_EVENT
             = BUILDER.translation("battery_shield.calc_damage_with_event")
             .comment("Calculate damage on shield with event. All damage on shield will be calculated with our mixin function in LivingEntity.hurt after any other hooks. If enabled, we will use forge event with lowest priority instead.").define("func.calc_damage_with_event", false);
+    private static final ForgeConfigSpec.BooleanValue SOUND_GLASS_BREAK_SOUND
+            = BUILDER.translation("battery_shield.use_glass_break_sound")
+            .define("misc.use_glass_break_sound", false);
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -70,6 +76,8 @@ public class Config {
     public static boolean send_charging_msg;
     public static boolean zero_damage_event;
     public static boolean calc_damage_with_event;
+    public static boolean use_glass_break_sound;
+    public static boolean use_2d_head;
     public static List<String> messages;
     public static List<String> messagesPhoenix;
 
@@ -84,6 +92,7 @@ public class Config {
         display_health = SHOW_HEALTH.get();
         display_number = SHOW_NUMBER.get();
         display_hud = SHOW_HUD.get();
+        use_2d_head = USE_2D_HEAD.get();
         send_charging_msg = SEND_CHARGING_MSG.get();
         battery_value = BATTERY_VALUE.get();
         small_battery_value = SMALL_BATTERY_VALUE.get();
@@ -93,5 +102,6 @@ public class Config {
         messagesPhoenix.addAll(MESSAGES_PHOENIX.get());
         zero_damage_event = ZERO_DAMAGE_EVENT.get();
         calc_damage_with_event = CALC_DAMAGE_WITH_EVENT.get();
+        use_glass_break_sound = SOUND_GLASS_BREAK_SOUND.get();
     }
 }

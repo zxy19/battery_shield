@@ -6,6 +6,5 @@ public enum DamageNumberType {
     SHIELD_WHITE,
     SHIELD_BLUE,
     SHIELD_PERP,
-    SHIELD_RED
-
+    SHIELD_RED;
 }

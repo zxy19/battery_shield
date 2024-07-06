@@ -1,11 +1,14 @@
 package cc.xypp.battery_shield.utils;
 
+import cc.xypp.battery_shield.Config;
 import cc.xypp.battery_shield.data.UsageEvent;
 import cc.xypp.battery_shield.items.SoundRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 
 public class SoundUtils {
@@ -34,7 +37,12 @@ public class SoundUtils {
             level.playSound(player, player.blockPosition(), SoundRegistry.CHARGE_PHOENIX.get(), SoundSource.PLAYERS, 1, 1);
         } else if (event == UsageEvent.CHARGE_DONE) {
             level.playSound(player, player.blockPosition(), SoundRegistry.CHARGE_DONE.get(), SoundSource.PLAYERS, 1, 1);
+        } else if(event == UsageEvent.SHIELD_BREAK){
+            if(Config.use_glass_break_sound){
+                level.playSound(player, player.blockPosition(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1, 1);
+            }else{
+                level.playSound(player, player.blockPosition(), SoundRegistry.SHIELD_BREAK.get(), SoundSource.PLAYERS, 1, 1);
+            }
         }
-
     }
 }

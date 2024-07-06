@@ -12,7 +12,10 @@
   ],
   "client": [
     "GuiGraphicMixin",
-    "MinecraftMixin"
+    "HttpTextureMixin",
+    "MinecraftMixin",
+    "PoseStackMixin",
+    "SkinManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

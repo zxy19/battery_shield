@@ -19,19 +19,31 @@ public class AssetsManager {
         }
 
         public void blit(GuiGraphics pGuiGraphics, int x, int y) {
-            this.blit(pGuiGraphics,x, y, 0, 0, width, height);
+            this.blit(pGuiGraphics, x, y, 0, 0, width, height);
         }
 
         public void blit(GuiGraphics pGuiGraphics, int x, int y, int drawWidth, int drawHeight) {
-            this.blit(pGuiGraphics,x, y, 0, 0, drawWidth, drawHeight);
+            this.blit(pGuiGraphics, x, y, 0, 0, drawWidth, drawHeight);
         }
 
         public void blit(GuiGraphics pGuiGraphics, int x, int y, int drawX, int drawY, int drawWidth, int drawHeight) {
             pGuiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.enableBlend();
+            RenderSystem.disableDepthTest();
             pGuiGraphics.blit(resourceLocation, x, y, drawX, drawY, drawWidth, drawHeight, width, height);
             pGuiGraphics.flush();
             RenderSystem.disableBlend();
+            RenderSystem.enableDepthTest();
+        }
+
+        public void blit(GuiGraphics pGuiGraphics, int x, int y, int order, int drawX, int drawY, int drawWidth, int drawHeight) {
+            pGuiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.enableBlend();
+            RenderSystem.disableDepthTest();
+            pGuiGraphics.blit(resourceLocation, x, y, order, drawX, drawY, drawWidth, drawHeight, width, height);
+            pGuiGraphics.flush();
+            RenderSystem.disableBlend();
+            RenderSystem.enableDepthTest();
         }
     }
 
