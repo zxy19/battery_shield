@@ -1,7 +1,5 @@
 package cc.xypp.battery_shield.helper;
 
-import cc.xypp.battery_shield.api.IGuiGraphics;
-import cc.xypp.battery_shield.api.IPoseStack;
 import cc.xypp.battery_shield.data.DamageNumberType;
 import cc.xypp.battery_shield.packet.DamagePacket;
 import cc.xypp.battery_shield.utils.EntityUtil;
@@ -13,7 +11,6 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -25,7 +22,6 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -96,10 +92,10 @@ public class DamageNumberManager {
             }
         }
     }
-    public void render(GuiGraphics guiGraphics, Camera camera) {
+    public void render(GuiGraphics guiGraphics, Camera camera, float partialTick) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
-        Vec3 fromPos = player.getEyePosition(1.0F);
+        Vec3 fromPos = player.getEyePosition(partialTick);
         Vec3 dir = player.getLookAngle();
         PoseStack poseStack = guiGraphics.pose();
         long curTime = System.currentTimeMillis();

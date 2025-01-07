@@ -7,10 +7,11 @@
   "item.battery_shield.shield_core_r":"Shield core[Red]",
   "item.battery_shield.shield_core_b":"Shield core[Blue]",
   "item.battery_shield.shield_core_p":"Shield core[Purple]",
-  "tooltip.battery_shield.level.red":"§cShield Red §9[%s/%s]",
-  "tooltip.battery_shield.level.blue":"§bShield Blue §9[%s/%s]",
-  "tooltip.battery_shield.level.purple":"§dShield Purple §9[%s/%s]",
-  "tooltip.battery_shield.level.white":"§fShield White §9[%s/%s]",
+  "tooltip.battery_shield.level.red":"§cShield Red §9[%s/%s§9]",
+  "tooltip.battery_shield.level.blue":"§bShield Blue §9[%s/%s§9]",
+  "tooltip.battery_shield.level.purple":"§dShield Purple §9[%s/%s§9]",
+  "tooltip.battery_shield.level.white":"§fShield White §9[%s/%s§9]",
   "item_group.battery_shield.main":"Battery Shield",
-  "config.jade.plugin_battery_shield.jade_data_provider": ""
+  "config.jade.plugin_battery_shield.jade_data_provider": "Battery Shield Data",
+  "battery_shield.evolve_point": "%s to Evolve"
 }

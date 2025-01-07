@@ -4,6 +4,7 @@ import cc.xypp.battery_shield.BatteryShield;
 import cc.xypp.battery_shield.Config;
 import cc.xypp.battery_shield.api.IDamageSourceA;
 import cc.xypp.battery_shield.api.ILivingEntityA;
+import cc.xypp.battery_shield.data.DamageNumberType;
 import cc.xypp.battery_shield.data.ShieldType;
 import cc.xypp.battery_shield.data.UsageEvent;
 import cc.xypp.battery_shield.helper.DamageNumberManager;
@@ -76,13 +77,13 @@ public class Server {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onLivingHurt(LivingHurtEvent event) {
-        if (((IDamageSourceA) event.getSource()).battery_shield$isByBatteryShield()) {
+        IDamageSourceA damageSource = (IDamageSourceA) event.getSource();
+        if (damageSource.battery_shield$isByBatteryShield()) {
             if (Config.zero_damage_event) {
-                event.setAmount(0);
+                event.setAmount(Math.max(0,event.getAmount() - damageSource.battery_shield$getShieldDamage()));
             }
         }
     }
-
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLivingDamage(LivingDamageEvent event) {
         if (EntityUtil.entityLevelIsClient(event.getEntity())) {
@@ -90,24 +91,46 @@ public class Server {
         }
         if (event.getSource().getEntity() instanceof ServerPlayer sp && event.getSource() instanceof IDamageSourceA iDamageSourceA) {
             float amount = event.getAmount();
+            float restAmount = amount - iDamageSourceA.battery_shield$getShieldDamage();
             boolean isBreakShield = iDamageSourceA.battery_shield$isBreakShield();
             if (iDamageSourceA.battery_shield$isByBatteryShield()) {
                 amount = iDamageSourceA.battery_shield$getShieldDamage();
             }
+
+            // 破甲音效
             if (isBreakShield) {
                 UsageEventManager.getInstance().send(sp, UsageEvent.SHIELD_BREAK);
             }
+            // 伤害显示包
             DamageNumberManager.getInstance().sendDamagePacket(event.getEntity(),
                     ShieldUtil.getTypeBySourceValue(event.getSource(), ((ILivingEntityA) event.getEntity()).battery_shield$getMaxShield()),
                     isBreakShield,
                     amount,
                     sp);
+
+            //溢出伤害计算
+            if (isBreakShield && restAmount>= 0) {
+                DamageNumberManager.getInstance().sendDamagePacket(event.getEntity(),
+                        DamageNumberType.RAW,
+                        false,
+                        restAmount,
+                        sp);
+            }
         }
         if (Config.calc_damage_with_event) {
             if (event.getSource() instanceof IDamageSourceA iDamageSourceA && event.getEntity() instanceof ILivingEntityA iLivingEntityA) {
                 if (iDamageSourceA.battery_shield$isByBatteryShield()) {
                     iLivingEntityA.battery_shield$shieldHurt(iDamageSourceA.battery_shield$getShieldDamage());
-                    event.setAmount(0);
+                    event.setAmount(Math.max(0,event.getAmount() - iDamageSourceA.battery_shield$getShieldDamage()));
+                }
+
+                //Attacker's shield accumulate.
+                if(event.getSource() != null && event.getSource().getEntity() instanceof ILivingEntityA iLivingEntityA1){
+                    float amount = event.getAmount();
+                    if (iDamageSourceA.battery_shield$isByBatteryShield()) {
+                        amount =iDamageSourceA.battery_shield$getShieldDamage();
+                    }
+                    iLivingEntityA1.battery_shield$accumulateShieldPoint(amount);
                 }
             }
         }

@@ -10,4 +10,8 @@ public interface ILivingEntityA {
     float battery_shield$getMaxShield();
     ShieldType battery_shield$getShieldType();
     void battery_shield$shieldHurt(float amount);
+
+    float battery_shield$getAccumulateShieldPoint();
+
+    void battery_shield$accumulateShieldPoint(float amount);
 }

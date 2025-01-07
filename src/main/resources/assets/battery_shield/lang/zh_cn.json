@@ -7,9 +7,11 @@
   "item.battery_shield.shield_core_r":"护盾核心[红]",
   "item.battery_shield.shield_core_b":"护盾核心[蓝]",
   "item.battery_shield.shield_core_p":"护盾核心[紫]",
-  "tooltip.battery_shield.level.red":"§c红色护盾 §9[%s/%s]",
-  "tooltip.battery_shield.level.blue":"§b蓝色护盾 §9[%s/%s]",
-  "tooltip.battery_shield.level.purple":"§d紫色护盾 §9[%s/%s]",
-  "tooltip.battery_shield.level.white":"§f白色护盾 §9[%s/%s]",
-  "item_group.battery_shield.main":"电池护盾"
+  "tooltip.battery_shield.level.red":"§c红色护盾 §9[%s/%s§9]",
+  "tooltip.battery_shield.level.blue":"§b蓝色护盾 §9[%s/%s§9]",
+  "tooltip.battery_shield.level.purple":"§d紫色护盾 §9[%s/%s§9]",
+  "tooltip.battery_shield.level.white":"§f白色护盾 §9[%s/%s§9]",
+  "item_group.battery_shield.main":"电池护盾",
+  "battery_shield.evolve_point": "剩余 %s 伤害进化",
+  "config.jade.plugin_battery_shield.jade_data_provider": "电池护盾数据"
 }

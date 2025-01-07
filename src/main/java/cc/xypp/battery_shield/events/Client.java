@@ -43,7 +43,7 @@ public class Client {
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
             final GuiGraphics guiGraphics = ((IGuiGraphicsGetter) Minecraft.getInstance()).getGuiGraphics(event.getPoseStack());
-            DamageNumberManager.getInstance().render(guiGraphics, event.getCamera());
+            DamageNumberManager.getInstance().render(guiGraphics, event.getCamera(),event.getPartialTick());
 
             EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
             Minecraft minecraft = Minecraft.getInstance();

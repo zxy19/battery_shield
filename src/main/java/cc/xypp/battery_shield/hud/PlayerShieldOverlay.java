@@ -8,6 +8,7 @@ import cc.xypp.battery_shield.utils.ShieldUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +34,20 @@ public class PlayerShieldOverlay implements IGuiOverlay {
         guiGraphics.renderItem(item, x, y);
     }
 
+    protected void renderEvolvePoint(ILivingEntityA iliving, GuiGraphics guiGraphics, float scale, int x, int y){
+        if(!Config.display_evolve || !Config.allow_evolve)return;
+        float evolveRem = ShieldUtil.getRemainToEvolveByMaxAndAccumulate(
+                iliving.battery_shield$getMaxShield(),
+                iliving.battery_shield$getAccumulateShieldPoint()
+        );
+        if(evolveRem<=0)return;
+        guiGraphics.drawString(Minecraft.getInstance().font,
+                I18n.get("battery_shield.evolve_point", String.format("%.0f",evolveRem)),
+                x,
+                y,
+                0xffffffff);
+    }
+
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int width, int height) {
         if (!Config.display_hud) return;
@@ -41,7 +56,6 @@ public class PlayerShieldOverlay implements IGuiOverlay {
         ILivingEntityA iliving = ((ILivingEntityA) (player));
         float max = iliving.battery_shield$getMaxShield();
         float shield = iliving.battery_shield$getShield();
-
         RenderUtils.renderBar(guiGraphics, 37, height - 25, 96, 6, AssetsManager.SHIELD_BORDER, ShieldUtil.getShieldTypeByValue(max), shield, max, true);
         RenderUtils.renderHealth(guiGraphics, 40, height - 20, 96, 6, player.getHealth(), player.getMaxHealth(), true);
         guiGraphics.pose().pushPose();
@@ -59,6 +73,10 @@ public class PlayerShieldOverlay implements IGuiOverlay {
             guiGraphics.pose().scale(1.7f, 1.7f, 1.7f);
             this.renderItem(guiGraphics, 5f, (int) (15 / 1.7), (int) ((height - 33) / 1.7));
         }
+        guiGraphics.pose().popPose();
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(0.8f, 0.8f, 0.8f);
+        this.renderEvolvePoint(iliving, guiGraphics, 0.8f, (int) (50 / 0.8), (int) ((height - 10) / 0.8));
         guiGraphics.pose().popPose();
     }
 
