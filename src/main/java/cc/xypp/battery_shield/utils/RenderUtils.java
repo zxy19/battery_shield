@@ -71,10 +71,10 @@ public class RenderUtils {
                                  boolean force) {
         if (!Config.display_shield && !force) return;
         for (int i = 0; i < 5; i++) {
-            renderBarCell(guiGraphics, x + i * width / 5, y, width / 5, height, fill, value - i * 10);
+            renderBarCell(guiGraphics, x + i * width / 5, y, width / 5, height, fill, value - i * Config.shield_pre_level);
         }
         for (int i = 0; i < 5; i++) {
-            renderBarCell(guiGraphics, x + i * width / 5, y, width / 5, height, bg, max - i * 10);
+            renderBarCell(guiGraphics, x + i * width / 5, y, width / 5, height, bg, max - i * Config.shield_pre_level);
         }
     }
 
