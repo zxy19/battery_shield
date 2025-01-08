@@ -84,7 +84,7 @@ public class Battery extends Item {
 
         if (p_41433_ instanceof ServerPlayer sp) {
             UsageEventManager.getInstance().send(sp, UsageEvent.CHARGE_START);
-        }else if(p_41433_ instanceof  LocalPlayer lp){
+        }else if(p_41433_ instanceof  LocalPlayer lp && Config.send_charging_msg){
             lp.connection.sendChat(MiscUtil.getMessage());
         }
         p_41433_.startUsingItem(p_41434_);
