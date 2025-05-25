@@ -81,7 +81,7 @@ public class SmallBattery extends Item {
     public InteractionResultHolder<ItemStack> use(@NotNull Level p_41432_, @NotNull Player p_41433_, @NotNull InteractionHand p_41434_) {
         if(p_41433_ instanceof ServerPlayer sp){
             UsageEventManager.getInstance().send(sp,UsageEvent.CHARGE_START_SMALL);
-        }else if(p_41433_ instanceof  LocalPlayer lp){
+        }else if(p_41433_ instanceof  LocalPlayer lp && Config.send_charging_msg){
             lp.connection.sendChat(MiscUtil.getMessage());
         }
 
